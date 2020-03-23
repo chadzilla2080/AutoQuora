@@ -46,7 +46,7 @@ Explain how to run the automated tests for this system
 Explain what these tests test and why
 
 ```
-Give an example
+Coming soon check back.
 ```
 
 ### And coding style tests
@@ -54,18 +54,17 @@ Give an example
 Explain what these tests test and why
 
 ```
-Give an example
+Coming soon check back.
 ```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+For deployment instructions please see https://www.digitalocean.com/community/tutorials/how-to-serve-django-applications-with-apache-and-mod_wsgi-on-ubuntu-14-04
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Django](https://docs.djangoproject.com/en/3.0/) - The web framework used
+* [Vue JS](https://vuejs.org/) - The front end used
 
 ## Contributing
 
@@ -77,9 +76,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+**Chad Buie** 
 
 ## License
 
@@ -87,7 +84,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Big Thanks To Michele Saba
+* https://github.com/pymike00
+
 
