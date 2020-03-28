@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+<meta name="description" content="{% block meta_description %}{% endblock %}">
+<title></title>
+<link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+<!--<link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">-->
+<!-- =-=-=-=-=-=-= Font Awesome =-=-=-=-=-=-= -->
+<link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
+<link rel="stylesheet" href="{% static "css/et-line-fonts.css" %}">
+<!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
+<!-- =-=-=-=-=-=-= Highliter Css =-=-=-=-=-=-= -->
+<link rel="stylesheet" href="{% static "css/styles/shCoreDefault.css" %}">
+<link rel="stylesheet" href="{% static "css/animate.min.css" %}">
+<link rel="stylesheet" href="{% static "css/bootstrap-dropdownhover.min.css" %}">
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+<script src="{% static "js/modernizr.js" %}"></script>
+<!--<script src="{% static "js/bootstrap-extras.js" %}"></script>--->
+
+<!--[if lt IE 9]>
+<script src="{% static "js/html5shiv.js" %}"></script>
+<script src="{% static "js/respond.min.js" %}"></script>
+<![endif]-->
+
+</head>
+<body>
+       <!-- =-=-=-=-=-=-= HEADER =-=-=-=-=-=-= -->
+       <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-4">
+                        <ul class="top-nav nav-left">
+                            <li><router-link :to="{ name: 'main' }" class="btn btn-sm btn-success">Home</router-link></li>
+                            <li class="hidden-xs"><a href="">Blog</a>
+                            </li>
+                            <li  class="hidden-xs"><a href="">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
+                        <ul class="top-nav nav-right">
+                            <li><a href="#" role="button"></a>
+                                <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">
+                                    <span class="hidden-xs small-padding">
+                                        <span>
+                                            {% if user.is_authenticated %}
+                                                Hi {{ user.username }}! <img class="img-circle resize" alt="" src="/static/img/13.jpg"> <a href="{% url 'logout' %}"> | Logout</a>
+                                                <ul class="dropdown-menu ">
+                                                    {% if user.is_staff %}
+                                                        <li><a href="/admin/"><i class=" icon-bargraph"></i> Dashboard</a></li>
+                                                    {% else %}
+                                                        <li><a href="profile.html"><i class=" icon-bargraph"></i> Dashboard</a></li>
+                                                        <li><a href=""><i class=" icon-gears"></i> Profile Setting</a></li>
+                                                        <li><a href=""><i class="icon-heart"></i> Questions</a></li>
+                                                        <li><a href="{% url 'logout' %}"><i class="icon-lock"></i> Logout</a></li>
+                                                    </ul>
+                                                    {% endif %}
+                                            {% else %}
+                                              <a href="{% url 'login' %}"><i class="fa fa-lock" aria-hidden="true"></i>Login | </a> <a href="{% url 'django_registration_register' %}"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a>
+                                            {% endif %}
+                                        </span>
+                                    </span>
+                                </a>
+                             </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- =-=-=-=-=-=-= START HEADER Navigation =-=-=-=-=-=-= -->
+        <div class="navbar navbar-default">
+            <div class="container">
+            <!-- header -->
+                <div class="navbar-header">
+                    <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">  <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <!-- logo -->
+                    <a href="index.html" class="navbar-brand">
+                        <img class="img-responsive" alt="" src="/static/img/autoquora.png">
+                    </a>
+                    <!-- header end -->
+                </div>
+                    <!-- navigation menu -->
+                <div class="navbar-collapse collapse">
+                    <!-- right bar -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="hidden-sm"><a href="how-work.html">How  It Works</a></li>
+                        <li><a href="/">Browse Questions</a></li>
+                        <li>
+                            <div class="btn-nav">
+                                <a href="/seaviking/survey/ask/" class="btn btn-primary btn-small navbar-btn">Ask Question</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            <!-- navigation menu end -->
+            <!--/.navbar-collapse -->
+            </div>
+        </div>
+    <!-- =-=-=-=-=-=-= END HEADER Navigation =-=-=-=-=-=-= -->
+        <div class="main-content-area">
+            <!-- =-=-=-=-=-=-= Latest Questions  =-=-=-=-=-=-= -->
+            <section class="white question-tabs padding-bottom-80" id="latest-post">
+                <div class="row">
+                    <!-- =-=-=-=-=-=-= START QUESTIONS =-=-=-=-=-=-= -->
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="formcontainer">
+                            {% block content %}  
+                            {% endblock %}  
+                        </div>
+                    </div>   
+                    <!-- =-=-=-=-=-=-= END QUESTIONS =-=-=-=-=-=-= -->
+                </div>
+            </section>
+        </div>                 
+<footer class="custom">
+    <div class="container">
+        <div class="row">
+            <p class="site-info text-center">
+                Powered By <a href="https://autopartex.net">AutoPartEx</a>
+            </p>
+        </div>
+    </div>
+</footer>
+<script src="{% static "js/jquery.min.js" %}"></script>
+    <!-- Bootstrap Core Css  -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <!-- Jquery Smooth Scroll  -->
+    <script src="{% static "js/jquery.smoothscroll.js" %}"></script>
+    <!-- Jquery Easing -->
+    <script src="{% static "js/easing.js" %}"></script>
+    <!-- Jquery Counter -->
+    <script src="{% static "js/jquery.countTo.js" %}"></script>
+    <!-- Jquery Waypoints -->
+    <script src="{% static "js/jquery.waypoints.js" %}"></script>
+    <!-- Jquery Appear Plugin -->
+    <script src="{% static "js/jquery.appear.min.js" %}"></script>
+</body>
+</html>

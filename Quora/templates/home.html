@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+<meta name="description" content="{% block meta_description %}{% endblock %}">
+<title></title>
+<link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/style.css" %}">
+<!--<link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">-->
+<!-- =-=-=-=-=-=-= Font Awesome =-=-=-=-=-=-= -->
+<link rel="stylesheet" href="{% static "css/font-awesome.css" %}">
+<link rel="stylesheet" href="{% static "css/et-line-fonts.css" %}">
+<!-- =-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-= -->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic|Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
+<!-- =-=-=-=-=-=-= Highliter Css =-=-=-=-=-=-= -->
+<link rel="stylesheet" href="{% static "css/styles/shCoreDefault.css" %}">
+<link rel="stylesheet" href="{% static "css/animate.min.css" %}">
+<link rel="stylesheet" href="{% static "css/bootstrap-dropdownhover.min.css" %}">
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+<script src="{% static "js/modernizr.js" %}"></script>
+<!--<script src="{% static "js/bootstrap-extras.js" %}"></script>--->
+
+<!--[if lt IE 9]>
+<script src="{% static "js/html5shiv.js" %}"></script>
+<script src="{% static "js/respond.min.js" %}"></script>
+<![endif]-->
+
+</head>
+<body>
+       <!-- =-=-=-=-=-=-= HEADER =-=-=-=-=-=-= -->
+       <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-4">
+                        <ul class="top-nav nav-left">
+                            <li><router-link :to="{ name: 'home' }" class="btn btn-sm btn-success">Home</router-link></li>
+                            <li class="hidden-xs"><a href="">Blog</a>
+                            </li>
+                            <li  class="hidden-xs"><a href="">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
+                        <ul class="top-nav nav-right">
+                            <li><a href="#" role="button"></a>
+                                <a class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown" data-animations="fadeInUp">
+                                    <span class="hidden-xs small-padding">
+                                        <span>
+                                            {% if user.is_authenticated %}
+                                                Hi {{ user.username }}! <img class="img-circle resize" alt="" src="/static/img/13.jpg"> <a href="{% url 'logout' %}"> | Logout</a>
+                                                <ul class="dropdown-menu ">
+                                                    {% if user.is_staff %}
+                                                        <li><a href="/admin/"><i class=" icon-bargraph"></i> Dashboard</a></li>
+                                                    {% else %}
+                                                        <li><a href="profile.html"><i class=" icon-bargraph"></i> Dashboard</a></li>
+                                                        <li><a href=""><i class=" icon-gears"></i> Profile Setting</a></li>
+                                                        <li><a href=""><i class="icon-heart"></i> Questions</a></li>
+                                                        <li><a href="{% url 'logout' %}"><i class="icon-lock"></i> Logout</a></li>
+                                                    </ul>
+                                                    {% endif %}
+                                            {% else %}
+                                              <a href="{% url 'login' %}"><i class="fa fa-lock" aria-hidden="true"></i>Login | </a> <a href="{% url 'django_registration_register' %}"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a>
+                                            {% endif %}
+                                        </span>
+                                    </span>
+                                </a>
+                             </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- =-=-=-=-=-=-= START QUESTIONS =-=-=-=-=-=-= -->
+<div class="main-content-area">
+        <!-- =-=-=-=-=-=-= Latest Questions  =-=-=-=-=-=-= -->
+        <section class="white question-tabs padding-bottom-80" id="latest-post">
+            <div class="container">
+                <div class="row">
+                    <!-- Content Area Bar -->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <!-- Tabs -->
+                                <ul class="nav panel-tabs">
+                                    <li> 
+                                        <a data-toggle="tab" href="#tab1"><i class="icofont icon-ribbon"></i><span class="hidden-xs">Recent Questions
+                                        <span></a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="tab" href="#tab2"><i class="icofont icon-layers"></i><span class="hidden-xs">Popular Responses
+                                        </span></a>
+                                    </li>
+                                    <li class="active"> 
+                                        <a data-toggle="tab" href="#tab3"><i class="icofont icon-global"></i><span class="hidden-xs">Recently Answered
+                                        </span></a>
+                                    </li>
+                                    <li> 
+                                        <a data-toggle="tab" href="#tab4"><i class="icofont icon-linegraph"></i><span class="hidden-xs">No answers
+                                        </span></a> 
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Start Question Panels -->
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div id="tab1" class="tab-pane active">
+                                    <!-- Question Listing -->
+                                    <div class="listing-grid">
+                                        <div class="row">
+                                            <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
+                                                <a data-toggle="tooltip" data-placement="bottom" href="#">
+                                                    <img class="img-responsive center-block" href="{% static "img/authors/1.jpg" %}">
+                                                </a>
+                                            </div>
+                                            <div class="col-md-7 col-sm-8  col-xs-12">
+                                                    {% block question %} 
+                                                    {% endblock %}
+                                                <div class="listing-meta"> <span><i class="fa fa-clock-o" aria-hidden="true"></i>8 mintes ago</span>  <span><i class="fa fa fa-eye" aria-hidden="true"></i> 750 Views</span> 
+                                            </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-2 col-xs-12">
+                                                <ul class="question-statistic">
+                                                    <li class="active"> <a data-toggle="tooltip" data-placement="bottom" data-original-title="Answers"><span></span></a> 
+                                                    </li>
+                                                    <li> <a data-toggle="tooltip" data-placement="bottom" data-original-title="Votes"><span></span></a> 
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-10 col-sm-10  col-xs-12">
+                                                <div class="pull-right tagcloud"> 
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab2" class="tab-pane">
+                                    <!-- Question Listing -->
+                                    <div class="listing-grid">
+                                        <div class="row">
+                                            <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab3" class="tab-pane">
+                                    <!-- Question Listing -->
+                                    <div class="listing-grid">
+                                        <div class="row">
+                                            <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab4" class="tab-pane">
+                                    <!-- Question Listing -->
+                                    <div class="listing-grid">
+                                        <div class="row">
+                                            <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Question Panels -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'auth_layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block auth %}
+<h1>Ask or Answer Questions</h1>
+<p class="lead text-muted">Share Your Knowledge!</p>
+<div class="login-form-container">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Log In</button>
+    </form>
+</div>
+{% endblock %}
